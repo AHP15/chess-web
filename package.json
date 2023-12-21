@@ -11,10 +11,13 @@
     "build:client": "tsc && vite build",
     "build": "npm run build:server && npm run build:client",
     "start": "npm run build && node build/server.js",
-    "test": "vitest"
+    "test": "vitest",
+    "dx": "docker-compose up",
+    "stop": "docker compose down --volumes"
   },
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^8.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
