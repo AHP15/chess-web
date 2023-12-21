@@ -9,14 +9,13 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'static')));
 
+app.get('/', (req: Request, res: Response) => {
+  console.log(req);
+  res.send({ message: 'Hello from the server!' });
+});
 
 app.get('*', (_, res) => {
   res.sendFile(path.resolve(__dirname, 'static/index.html'));
-});
-
-app.get('/', (req: Request, res: Response) => {
-  console.log(req);
-  res.json({ message: 'Hello from the server!' });
 });
 
 export default app;
