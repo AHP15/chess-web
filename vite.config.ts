@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'build/static',
+    watch: {
+      include: 'src/**',
+    },
   },
   test: {
     globals: true,

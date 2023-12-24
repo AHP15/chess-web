@@ -10,12 +10,13 @@
     "build:server": "tsc -p tsconfig.server.json",
     "build:client": "tsc && vite build",
     "build": "npm run build:server && npm run build:client",
-    "start": "npm run build && node build/server.js",
+    "start": "concurrently 'npm run build' 'node build/server.js'",
     "test": "vitest",
     "dx": "docker-compose up",
     "stop": "docker compose down --volumes"
   },
   "dependencies": {
+    "concurrently": "^8.2.2",
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
     "react": "^18.2.0",
