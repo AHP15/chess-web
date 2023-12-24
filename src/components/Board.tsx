@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import initialPieces, { Pieces } from '../../gameLogic/initialPieces';
 import getMatrix from '../../gameLogic/board';
-import Square from './Square';
+import Square, { OperationTypeAfterSquareClick, PieceTypeWithPublicName } from './Square';
+import { PossibleSquare } from '../../gameLogic/utils';
 
 import styles from '../styles/Board.module.css';
 
@@ -10,22 +11,29 @@ export type Game = {
   id: string,
   player: string,
   pieces: Pieces,
+  possibleSquares: PossibleSquare[],
+  selectedPiece: PieceTypeWithPublicName | null,
+  lastAction: OperationTypeAfterSquareClick,
 };
 
 const Board: React.FC<{ player: string }> = ({ player }) => {
-  const [game,] = useState<Game>({
+  const [game, setGame] = useState<Game>({
     id: Math.random().toLocaleString(),
     player,
-    pieces: initialPieces
+    pieces: initialPieces,
+    possibleSquares: [],
+    selectedPiece: null,
+    lastAction: 'inprogress'
   });
 
   return (
-    <div className={styles.board}>
+    <div data-testid={game.lastAction} className={styles.board}>
       {
         getMatrix().map(row => row.map(square => (
           <Square
             key={square.name}
             game={game}
+            setGame={setGame}
             square={square}
           />
         )))

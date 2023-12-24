@@ -26,7 +26,7 @@ export default function getMatrix(): Row[] {
       // why is this? : this is just a pattren I noticed when I was looking at the chess board
       value = ((i % 2 === 0 && j % 2 === 0) || (i % 2 !== 0 && j % 2 !== 0))
         ? "rgb(162, 99, 16)"
-        : "burlywood";
+        : "lightgreen";
 
       row.push({
         name: `${squareName}${i + 1}`,

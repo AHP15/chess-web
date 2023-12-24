@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.get('/', (req: Request, res: Response) => {
-  console.log(req);
+  console.log(req.body);
   res.send({ message: 'Hello from the server!' });
 });
 
