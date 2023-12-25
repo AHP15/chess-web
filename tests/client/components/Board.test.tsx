@@ -28,3 +28,28 @@ describe('test Board for white pieces', () => {
     expect(screen.getByTestId('calculate')).toBeDefined();
   });
 });
+
+describe('test Board for black pieces', () => {
+  test('when empty squared is clicked, a clear operation should performed', () => {
+    // ARRANGE
+    render(<Board player='black' />);
+
+    // ACT
+    fireEvent.click(screen.getByTitle('A7')); // black pawn
+    fireEvent.click(screen.getByTitle('A6')); // empty square
+
+    // ASSERT
+    expect(screen.getByTestId('clear')).toBeDefined();
+  });
+
+  test('when the user click one of his pieces calculation of possible moves should be performed', () => {
+    // ARRANGE
+    render(<Board player='black' />);
+
+    // ACT
+    fireEvent.click(screen.getByTitle('A8')); // left black rook
+
+    // ASSERT
+    expect(screen.getByTestId('calculate')).toBeDefined();
+  });
+});

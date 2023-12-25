@@ -128,7 +128,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       onClick={handleClick}
       title={square.name}
     >
-      {piece && <p style={{ cursor: 'pointer' }}>{piece.publicName}</p>}
+      {piece && <p style={{ cursor: 'pointer', color: 'blue' }}>{piece.publicName}</p>}
       {possibleSquare && <p>p</p>}
     </div>
   );

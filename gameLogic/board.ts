@@ -25,8 +25,8 @@ export default function getMatrix(): Row[] {
       // square with coordinates that are both even or odd will be white otherwise it will be black
       // why is this? : this is just a pattren I noticed when I was looking at the chess board
       value = ((i % 2 === 0 && j % 2 === 0) || (i % 2 !== 0 && j % 2 !== 0))
-        ? "rgb(162, 99, 16)"
-        : "lightgreen";
+        ? "green"
+        : "white";
 
       row.push({
         name: `${squareName}${i + 1}`,
