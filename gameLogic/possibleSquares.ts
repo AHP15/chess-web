@@ -3,6 +3,7 @@ import { PieceTypeWithPublicName } from '../src/components/Square';
 import { PossibleSquare } from './utils';
 import calculatePossibleMovesforRooks from './rookCalculation';
 import calculatePossibleMovesforBishops from './bishopCalculation';
+import calculatePossibleMovesforKnights from './knightCalculation';
 
 export default function calculatePossibleSquares(pieces: Pieces, piece: PieceTypeWithPublicName): PossibleSquare[] {
   let moves: PossibleSquare[] = [];
@@ -22,6 +23,10 @@ export default function calculatePossibleSquares(pieces: Pieces, piece: PieceTyp
         ...calculatePossibleMovesforRooks(piece.info, pieces),
         ...calculatePossibleMovesforBishops(piece.info, pieces)
       ];
+      break;
+    case 'WKN':
+    case 'BKN':
+      moves = calculatePossibleMovesforKnights(piece.info, pieces);
       break;
     default: return [];
   }

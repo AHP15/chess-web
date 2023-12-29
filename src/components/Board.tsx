@@ -14,6 +14,7 @@ export type Game = {
   possibleSquares: PossibleSquare[],
   selectedPiece: PieceTypeWithPublicName | null,
   lastAction: OperationTypeAfterSquareClick,
+  enpassant: boolean
 };
 
 const Board: React.FC<{ player: string }> = ({ player }) => {
@@ -23,7 +24,8 @@ const Board: React.FC<{ player: string }> = ({ player }) => {
     pieces: initialPieces,
     possibleSquares: [],
     selectedPiece: null,
-    lastAction: 'inprogress'
+    lastAction: 'inprogress',
+    enpassant: false,
   });
 
   return (
