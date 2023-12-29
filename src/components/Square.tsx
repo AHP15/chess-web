@@ -3,6 +3,7 @@ import { Game } from './Board';
 import { PieceType, Pieces } from '../../gameLogic/initialPieces';
 import { SquareType } from '../../gameLogic/board';
 import { PossibleSquare } from '../../gameLogic/utils';
+import calculatePossibleSquares from '../../gameLogic/possibleSquares';
 
 import styles from '../styles/Board.module.css';
 
@@ -50,13 +51,13 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
    * 
    * 1.   square is empty
    * 1.1. case 1 and one piece is selected and clicked square is not a possible square
-   * 1.2. case 1, case 1.1, and the current square is a possible square (from previeus click)
+   * 1.2. case 1, one piece is selected, and the current square is a possible square (from previeus click)
    * 
    * 2.   square has a piece
    * 2.1. case 2 and the piece is from the current player (they have the same color)
    * 2.2. case 2 and the piece is from the opponent (they have different colors)
-   * 2.2.1. case 2, case 2.1, and a piece is selected and is not a possible square
-   * 2.2.2. case 2, case 2.1, and a piece is selected, and is a possible square (from previeus click)
+   * 2.2.1. case 2, and a piece is selected and is not a possible square
+   * 2.2.2. case 2, and a piece is selected, and is a possible square (from previeus click)
    */
   const handleClick = () => {
 
@@ -95,7 +96,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
         // calculate possible squares
         setGame(prev => ({
           ...prev,
-          possibleSquares: [], // this to be calculated later
+          possibleSquares: calculatePossibleSquares(game.pieces, piece),
           selectedPiece: piece,
           lastAction: 'calculate',
         }));
@@ -129,7 +130,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       title={square.name}
     >
       {piece && <p style={{ cursor: 'pointer', color: 'blue' }}>{piece.publicName}</p>}
-      {possibleSquare && <p>p</p>}
+      {possibleSquare && <p style={{ color: 'red' }}>p</p>}
     </div>
   );
 };
