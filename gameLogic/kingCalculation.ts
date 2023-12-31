@@ -27,7 +27,11 @@ function traverseChessLineForCheck(
     square = { x: X, y: Y };
 
     const piece = pieceInSquare(square, pieces);
-    if (piece && checkAgainst.indexOf(piece.name) !== -1) return true;
+    if (piece && checkAgainst.indexOf(piece.name) !== -1) {
+      return true
+    } else if (piece) {
+      break;
+    }
   }
   return false;
 }
@@ -48,11 +52,11 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
   const piece1 = pieceInSquare(square1, pieces);
   const piece2 = pieceInSquare(square2, pieces);
 
-  if ((isWhite && piece1!.name == 'BP') || (!isWhite && piece1!.name == 'WP')) {
+  if ((isWhite && piece1?.name == 'BP') || (!isWhite && piece1?.name == 'WP')) {
     return true;
   }
 
-  if ((isWhite && piece2!.name == 'BP') || (!isWhite && piece2!.name == 'WP')) {
+  if ((isWhite && piece2?.name == 'BP') || (!isWhite && piece2?.name == 'WP')) {
     return true;
   }
 
@@ -70,7 +74,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x <= 7 && y <= 7,
     x => x,
     y => ++y,
-    isWhite ? attackedByQueenOrRook.white : attackedByQueenOrRook.black
+    isWhite ? attackedByQueenOrRook.black : attackedByQueenOrRook.white
   );
 
   const checkVerticalLineToBottom = traverseChessLineForCheck(
@@ -79,7 +83,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x <= 7 && y >= 0,
     x => x,
     y => --y,
-    isWhite ? attackedByQueenOrRook.white : attackedByQueenOrRook.black
+    isWhite ? attackedByQueenOrRook.black : attackedByQueenOrRook.white
   );
 
   const checkHorizontalLineToLeft = traverseChessLineForCheck(
@@ -88,7 +92,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x >= 0 && y <= 7,
     x => --x,
     y => y,
-    isWhite ? attackedByQueenOrRook.white : attackedByQueenOrRook.black
+    isWhite ? attackedByQueenOrRook.black : attackedByQueenOrRook.white
   );
 
   const checkHorizontalLineToRight = traverseChessLineForCheck(
@@ -97,7 +101,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x <= 7 && y <= 7,
     x => ++x,
     y => y,
-    isWhite ? attackedByQueenOrRook.white : attackedByQueenOrRook.black
+    isWhite ? attackedByQueenOrRook.black : attackedByQueenOrRook.white
   );
   if (checkVerticalLineToTop || checkVerticalLineToBottom
     || checkHorizontalLineToLeft || checkHorizontalLineToRight) {
@@ -117,7 +121,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x <= 7 && y <= 7,
     x => ++x,
     y => ++y,
-    isWhite ? attackedByQueenOrBishop.white : attackedByQueenOrBishop.black
+    isWhite ? attackedByQueenOrBishop.black : attackedByQueenOrBishop.white
   );
 
   const checkLineToLeftBottom = traverseChessLineForCheck(
@@ -126,7 +130,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x >= 0 && y >= 0,
     x => --x,
     y => --y,
-    isWhite ? attackedByQueenOrBishop.white : attackedByQueenOrBishop.black
+    isWhite ? attackedByQueenOrBishop.black : attackedByQueenOrBishop.white
   );
 
   const checkLineToLeftTop = traverseChessLineForCheck(
@@ -135,7 +139,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x >= 0 && y <= 7,
     x => --x,
     y => ++y,
-    isWhite ? attackedByQueenOrBishop.white : attackedByQueenOrBishop.black
+    isWhite ? attackedByQueenOrBishop.black : attackedByQueenOrBishop.white
   );
 
   const checkLineToRightBottom = traverseChessLineForCheck(
@@ -144,7 +148,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     (x, y) => x <= 7 && y >= 0,
     x => ++x,
     y => --y,
-    isWhite ? attackedByQueenOrBishop.white : attackedByQueenOrBishop.black
+    isWhite ? attackedByQueenOrBishop.black : attackedByQueenOrBishop.white
   );
   if (checkLineToRightTop || checkLineToLeftBottom
     || checkLineToLeftTop || checkLineToRightBottom) {
@@ -169,7 +173,7 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
 
   allPositions.forEach(position => {
     const piece = pieceInSquare(position, pieces);
-    if ((isWhite && piece!.name == 'BKN') || (!isWhite && piece1!.name == 'WKN')) {
+    if ((isWhite && piece?.name == 'BKN') || (!isWhite && piece1?.name == 'WKN')) {
       return true;
     }
   });
