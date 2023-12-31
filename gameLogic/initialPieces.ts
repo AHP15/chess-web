@@ -44,9 +44,9 @@ export default new Map<string, PieceType>([
   ['BC8', { name: "BB", x: 2, y: 7, color: "black", image: 'black-bishop.png' }],
   ['BF8', { name: "BB", x: 5, y: 7, color: "black", image: 'black-bishop.png' }],
   // black queen
-  ['QE8', { name: "BQ", x: 3, y: 7, color: "black", image: 'black-queen.png' }],
+  ['QD8', { name: "BQ", x: 3, y: 7, color: "black", image: 'black-queen.png' }],
   // black king
-  ['KGD8', { name: "BKG", x: 4, y: 7, color: "black", isFirstMove: true, image: 'black-king.png' }],
+  ['KGE8', { name: "BKG", x: 4, y: 7, color: "black", isFirstMove: true, image: 'black-king.png' }],
   // back pawns
   ['PA7', { name: "BP", x: 0, y: 6, color: "black", isFirstMove: true, canPromote: false, image: 'black-pawn.png' }],
   ['PB7', { name: "BP", x: 1, y: 6, color: "black", isFirstMove: true, canPromote: false, image: 'black-pawn.png' }],
