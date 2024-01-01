@@ -6,6 +6,7 @@ import { PossibleSquare } from '../../gameLogic/utils';
 import calculatePossibleSquares from '../../gameLogic/possibleSquares';
 
 import styles from '../styles/Board.module.css';
+import PieceUniCode from './PieceImage';
 
 
 export type PieceTypeWithPublicName = {
@@ -125,11 +126,17 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
   return (
     <div
       className={styles.square}
-      style={{ backgroundColor: square.background }}
+      style={{
+        backgroundColor: square.background,
+        color: 'black',
+        fontSize: '3.5rem'
+      }}
       onClick={handleClick}
       title={square.name}
     >
-      {piece && <p style={{ cursor: 'pointer', color: 'blue' }}>{piece.publicName}</p>}
+      {piece &&
+        <PieceUniCode pieceName={piece.info.name} />
+      }
       {possibleSquare && <p style={{ color: 'red' }}>p</p>}
     </div>
   );
