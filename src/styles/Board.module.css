@@ -19,22 +19,37 @@
 .square_char {
   position: absolute;
   right: 1px;
-  bottom: -12px;
-  font-size: 12px;
+  bottom: -8px;
+  font-size: 8px;
 }
 
 .square_num {
   position: absolute;
   left: 1px;
-  top: -12px;
-  font-size: 12px;
+  top: -8px;
+  font-size: 8px;
 }
 
-.possible_square {
+.pieceImage {
+  color: black;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.possible_square,
+.capture_square {
   width: 50%;
   height: 50%;
   border-radius: 50%;
   background-color: rgba(1, 1, 1, 0.2);
+  position: absolute;
+}
+
+.capture_square {
+  width: 70%;
+  height: 70%;
+  background-color: transparent;
+  border: 8px solid rgba(1, 1, 1, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -48,4 +63,17 @@
     height: 60px;
   }
 
+  .square_char {
+    bottom: -12px;
+    font-size: 12px;
+  }
+
+  .square_num {
+    font-size: 12px;
+    top: -12px;
+  }
+
+  .pieceImage {
+    font-size: 3.5rem;
+  }
 }

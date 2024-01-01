@@ -1,3 +1,4 @@
+import styles from '../styles/Board.module.css';
 
 const PieceUniCode = ({ pieceName }: { pieceName: string }) => {
   let jsx;
@@ -42,11 +43,7 @@ const PieceUniCode = ({ pieceName }: { pieceName: string }) => {
       jsx = <></>
   }
 
-  return <p style={{
-    cursor: 'pointer',
-    color: 'black',
-    fontSize: '3.5rem'
-  }}>{jsx}</p>;
+  return <p className={styles.pieceImage}>{jsx}</p>;
 }
 
 export default PieceUniCode;
