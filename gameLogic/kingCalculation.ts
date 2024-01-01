@@ -171,14 +171,15 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
     { x: X - 2, y: Y - 1 },
   ];
 
+  let attackedByKnight = false;
   allPositions.forEach(position => {
     const piece = pieceInSquare(position, pieces);
     if ((isWhite && piece?.name == 'BKN') || (!isWhite && piece1?.name == 'WKN')) {
-      return true;
+      attackedByKnight = true;
     }
   });
 
-  return false;
+  return attackedByKnight;
 }
 
 export default function calculatePossibleMovesForKing() {

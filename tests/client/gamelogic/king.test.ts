@@ -350,4 +350,30 @@ describe('King tests/ isKingInCheck', () => {
       expect(inCheck2).toBe(true);
     });
   });
+
+  describe('Test against knight', () => {
+    const pieces = new Map<string, PieceType>([...initialPieces]);
+    pieces.set(whiteKing, { ...pieces.get(whiteKing) as PieceType, y: 3 });
+    const { x: X, y: Y } = pieces.get(whiteKing) as PieceType;
+    const allPositions = [
+      { x: X + 1, y: Y + 2 },
+      { x: X - 1, y: Y + 2 },
+      { x: X + 1, y: Y - 2 },
+      { x: X - 1, y: Y - 2 },
+      { x: X + 2, y: Y + 1 },
+      { x: X - 2, y: Y + 1 },
+      { x: X + 2, y: Y - 1 },
+      { x: X - 2, y: Y - 1 },
+    ];
+
+    allPositions.forEach((position) => {
+      test(`test position: x => ${position.x} y => ${position.y}`, () => {
+        pieces.set('KNB8', { ...pieces.get('KNB8') as PieceType, x: position.x, y: position.y });
+
+        const inCheck = isKingInCheck(pieces.get(whiteKing) as PieceType, pieces);
+
+        expect(inCheck).toBe(true);
+      });
+    });
+  });
 });
