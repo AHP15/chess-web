@@ -11,7 +11,7 @@ describe('test Board for white pieces', () => {
 
     // ACT
     fireEvent.click(screen.getByTitle('A2')); // white pawn
-    fireEvent.click(screen.getByTitle('A3')); // empty square
+    fireEvent.click(screen.getByTitle('A5')); // empty square
 
     // ASSERT
     expect(screen.getByTestId('clear')).toBeDefined();
@@ -36,7 +36,7 @@ describe('test Board for black pieces', () => {
 
     // ACT
     fireEvent.click(screen.getByTitle('A7')); // black pawn
-    fireEvent.click(screen.getByTitle('A6')); // empty square
+    fireEvent.click(screen.getByTitle('A4')); // empty square
 
     // ASSERT
     expect(screen.getByTestId('clear')).toBeDefined();
