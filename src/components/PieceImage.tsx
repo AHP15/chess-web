@@ -42,7 +42,11 @@ const PieceUniCode = ({ pieceName }: { pieceName: string }) => {
       jsx = <></>
   }
 
-  return <p style={{ cursor: 'pointer' }}>{jsx}</p>;
+  return <p style={{
+    cursor: 'pointer',
+    color: 'black',
+    fontSize: '3.5rem'
+  }}>{jsx}</p>;
 }
 
 export default PieceUniCode;

@@ -16,6 +16,27 @@
   position: relative;
 }
 
+.square_char {
+  position: absolute;
+  right: 1px;
+  bottom: -12px;
+  font-size: 12px;
+}
+
+.square_num {
+  position: absolute;
+  left: 1px;
+  top: -12px;
+  font-size: 12px;
+}
+
+.possible_square {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background-color: rgba(1, 1, 1, 0.2);
+}
+
 @media (min-width: 768px) {
 
   .board {

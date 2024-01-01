@@ -128,8 +128,6 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       className={styles.square}
       style={{
         backgroundColor: square.background,
-        color: 'black',
-        fontSize: '3.5rem'
       }}
       onClick={handleClick}
       title={square.name}
@@ -137,7 +135,17 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       {piece &&
         <PieceUniCode pieceName={piece.info.name} />
       }
-      {possibleSquare && <p style={{ color: 'red' }}>p</p>}
+      {possibleSquare && <p className={styles.possible_square}></p>}
+      {square.x === 0 &&
+        <p style={{ color: square.background === 'white' ? 'green' : 'white' }} className={styles.square_num}>
+          {square.name.charAt(1).toLocaleLowerCase()}
+        </p>
+      }
+      {square.y === 0 &&
+        <p style={{ color: square.background === 'white' ? 'green' : 'white' }} className={styles.square_char}>
+          {square.name.charAt(0).toLocaleLowerCase()}
+        </p>
+      }
     </div>
   );
 };
