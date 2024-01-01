@@ -4,6 +4,7 @@ import { PieceType, Pieces } from '../../gameLogic/initialPieces';
 import { SquareType } from '../../gameLogic/board';
 import { PossibleSquare } from '../../gameLogic/utils';
 import calculatePossibleSquares from '../../gameLogic/possibleSquares';
+import movePiece from '../../gameLogic/movePiece';
 
 import styles from '../styles/Board.module.css';
 import PieceUniCode from './PieceImage';
@@ -84,6 +85,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
         // move piece
         setGame(prev => ({
           ...prev,
+          pieces: movePiece(game.pieces, game.selectedPiece as PieceTypeWithPublicName, square),
           possibleSquares: [],
           selectedPiece: null,
           lastAction: 'move',
@@ -115,6 +117,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
           // move piece
           setGame(prev => ({
             ...prev,
+            pieces: movePiece(game.pieces, game.selectedPiece as PieceTypeWithPublicName, square),
             possibleSquares: [],
             selectedPiece: null,
             lastAction: 'move',
@@ -135,7 +138,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       {piece &&
         <PieceUniCode pieceName={piece.info.name} />
       }
-      {possibleSquare && <p className={styles.possible_square}></p>}
+      {possibleSquare && <p className={styles[`${piece ? 'capture_square' : 'possible_square'}`]}></p>}
       {square.x === 0 &&
         <p style={{ color: square.background === 'white' ? 'green' : 'white' }} className={styles.square_num}>
           {square.name.charAt(1).toLocaleLowerCase()}
