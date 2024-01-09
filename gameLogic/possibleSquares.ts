@@ -1,10 +1,12 @@
-import { Pieces } from './initialPieces';
+import { PieceType, Pieces } from './initialPieces';
 import { PieceTypeWithPublicName } from '../src/components/Square';
 import { PossibleSquare } from './utils';
 import calculatePossibleMovesforRooks from './rookCalculation';
 import calculatePossibleMovesforBishops from './bishopCalculation';
 import calculatePossibleMovesforKnights from './knightCalculation';
 import calculatePossibleMovesforPawns from './pawnCalculation';
+import calculatePossibleMovesForKing, { isKingInCheck } from './kingCalculation';
+import movePiece from './movePiece';
 
 export default function calculatePossibleSquares(pieces: Pieces, piece: PieceTypeWithPublicName): PossibleSquare[] {
   let moves: PossibleSquare[] = [];
@@ -33,8 +35,26 @@ export default function calculatePossibleSquares(pieces: Pieces, piece: PieceTyp
     case 'BKN':
       moves = calculatePossibleMovesforKnights(piece.info, pieces);
       break;
+    case 'WKG':
+    case 'BKG':
+      moves = calculatePossibleMovesForKing(piece.info, pieces);
+      break;
     default: return [];
   }
 
-  return moves;
+  // check whether any of the possible moves calculated will result in a king check
+  // if so remove it
+
+  const finaleMoves: PossibleSquare[] = [];
+  const king = piece.info.color === 'white'
+    ? pieces.get('KGE1') as PieceType
+    : pieces.get('KGE8') as PieceType;
+  moves.forEach(square => {
+    const newPieces = movePiece(pieces, piece, square);
+    const inCheck = isKingInCheck(king, newPieces); // king should be passed to this function
+    if (!inCheck) {
+      finaleMoves.push(square);
+    }
+  });
+  return finaleMoves;
 }
