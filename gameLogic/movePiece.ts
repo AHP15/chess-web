@@ -22,25 +22,10 @@ export default function movePiece(
   pieces.set(piece.publicName, pieceWithNewPosition);
 
   const pieceName = piece.info.name;
-  switch (pieceName) {
-    case 'WR':
-    case 'BR':
-    case 'WKG':
-    case 'BKG':
-      pieceWithNewPosition.isFirstMove = false;
-      break;
-    case 'WP':
-    case 'BP':
-      pieceWithNewPosition.isFirstMove = false;
-      if (pieceWithNewPosition.y === 7 || pieceWithNewPosition.y === 0) {
-        pieceWithNewPosition.canPromote = true;
-      }
-  }
-
 
   // See if this move is castling moving
   // If so: move the rook too
-  if (pieceName === "WKG" || pieceName === "BKG") {
+  if ((pieceName === 'WKG' || pieceName === 'BKG') && piece.info.isFirstMove) {
 
     const shortCastlingXvalue = 6;
     const yValueForWhiteKing = 0;
@@ -67,6 +52,21 @@ export default function movePiece(
     else if (newSquare.x === longCastlingXvalue && newSquare.y === yValueForBlackKing) {
       pieces.set('RA8', { ...pieces.get('RA8') as PieceType, x: newSquare.x + 1 });
     }
+  }
+
+  switch (pieceName) {
+    case 'WR':
+    case 'BR':
+    case 'WKG':
+    case 'BKG':
+      pieceWithNewPosition.isFirstMove = false;
+      break;
+    case 'WP':
+    case 'BP':
+      pieceWithNewPosition.isFirstMove = false;
+      if (pieceWithNewPosition.y === 7 || pieceWithNewPosition.y === 0) {
+        pieceWithNewPosition.canPromote = true;
+      }
   }
 
   return pieces;
