@@ -46,11 +46,12 @@ export default function calculatePossibleSquares(pieces: Pieces, piece: PieceTyp
   // if so remove it
 
   const finaleMoves: PossibleSquare[] = [];
-  const king = piece.info.color === 'white'
-    ? pieces.get('KGE1') as PieceType
-    : pieces.get('KGE8') as PieceType;
+
   moves.forEach(square => {
-    const newPieces = movePiece(pieces, piece, square);
+    const newPieces = movePiece(new Map([...pieces]), piece, square);
+    const king = piece.info.color === 'white'
+      ? newPieces.get('KGE1') as PieceType
+      : newPieces.get('KGE8') as PieceType;
     const inCheck = isKingInCheck(king, newPieces); // king should be passed to this function
     if (!inCheck) {
       finaleMoves.push(square);
