@@ -136,7 +136,7 @@ const Square: React.FC<Props> = ({ game, setGame, square }) => {
       title={square.name}
     >
       {piece &&
-        <PieceUniCode pieceName={piece.info.name} />
+        <PieceUniCode pieceName={piece.info.name} player={game.player} />
       }
       {possibleSquare && <p className={styles[`${piece ? 'capture_square' : 'possible_square'}`]}></p>}
       {square.x === 0 &&

@@ -1,10 +1,15 @@
-.board {
+.board,
+.flip_board {
   display: grid;
   grid-template-columns: repeat(8, 30px);
   box-shadow: 1px 1px 5px black;
   transition: 0.3s;
   width: fit-content;
   position: relative;
+}
+
+.flip_board {
+  transform: rotate(180deg);
 }
 
 .square {
@@ -30,10 +35,14 @@
   font-size: 8px;
 }
 
-.pieceImage {
-  color: black;
+.pieceImage,
+.flip_pieceImage {
   cursor: pointer;
   font-size: 2rem;
+}
+
+.flip_pieceImage {
+  transform: rotate(180deg);
 }
 
 .possible_square,
@@ -54,11 +63,12 @@
 
 @media (min-width: 768px) {
 
-  .board {
+  .board,
+  .flip_board {
     grid-template-columns: repeat(8, 60px);
   }
 
-  .square {
+  .square{
     width: 60px;
     height: 60px;
   }
@@ -73,7 +83,8 @@
     top: -12px;
   }
 
-  .pieceImage {
+  .pieceImage,
+  .flip_pieceImage {
     font-size: 3.5rem;
   }
 }
