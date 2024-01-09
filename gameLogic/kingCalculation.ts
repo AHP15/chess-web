@@ -1,5 +1,5 @@
 import { PieceType, Pieces } from './initialPieces';
-import { Condition, Effect, PossibleSquare } from './utils';
+import { Condition, Effect, PossibleSquare, squareInfo } from './utils';
 
 function pieceInSquare(square: PossibleSquare, pieces: Pieces): PieceType | null {
   let data: PieceType | null = null;
@@ -182,6 +182,27 @@ export function isKingInCheck(king: PieceType, pieces: Pieces): boolean {
   return attackedByKnight;
 }
 
-export default function calculatePossibleMovesForKing() {
+export default function calculatePossibleMovesForKing(piece: PieceType, pieces: Pieces): PossibleSquare[] {
+  const { x: X, y: Y } = piece;
+  const moves: PossibleSquare[] = [];
+  const allPossitions = [
+    { x: X, y: Y + 1 },
+    { x: X + 1, y: Y + 1 },
+    { x: X - 1, y: Y + 1 },
+    { x: X, y: Y - 1 },
+    { x: X + 1, y: Y - 1 },
+    { x: X - 1, y: Y - 1 },
+    { x: X + 1, y: Y },
+    { x: X - 1, y: Y }
+  ];
 
+  allPossitions.forEach(({ x, y }) => {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
+
+    const { freeSquare, capturingPossible } = squareInfo({ x, y }, piece.color, pieces);
+    if (freeSquare || capturingPossible) {
+      moves.push({ x, y });
+    }
+  });
+  return moves;
 }
