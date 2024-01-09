@@ -29,7 +29,7 @@ const Board: React.FC<{ player: string }> = ({ player }) => {
   });
 
   return (
-    <div data-testid={game.lastAction} className={styles.board}>
+    <div data-testid={game.lastAction} className={styles[`${player === 'white' ? 'board' : 'flip_board'}`]}>
       {
         getMatrix().map(row => row.map(square => (
           <Square
