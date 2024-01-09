@@ -1,6 +1,6 @@
 import styles from '../styles/Board.module.css';
 
-const PieceUniCode = ({ pieceName }: { pieceName: string }) => {
+const PieceUniCode = ({ pieceName, player }: { pieceName: string, player: string }) => {
   let jsx;
   switch (pieceName) {
     case 'WP':
@@ -43,7 +43,7 @@ const PieceUniCode = ({ pieceName }: { pieceName: string }) => {
       jsx = <></>
   }
 
-  return <p className={styles.pieceImage}>{jsx}</p>;
+  return <p className={styles[`${player === 'white' ? 'pieceImage' : 'flip_pieceImage'}`]}>{jsx}</p>;
 }
 
 export default PieceUniCode;
