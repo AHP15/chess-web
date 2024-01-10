@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import initialPieces, { Pieces } from '../../gameLogic/initialPieces';
+import initialPieces, {
+  PieceType,
+  Pieces,
+  promotionPiecesForBlack,
+  promotionPiecesForWhite
+} from '../../gameLogic/initialPieces';
 import getMatrix from '../../gameLogic/board';
 import Square, { OperationTypeAfterSquareClick, PieceTypeWithPublicName } from './Square';
 import { PossibleSquare } from '../../gameLogic/utils';
 
 import styles from '../styles/Board.module.css';
+import Promotion from './Promotion';
 
 export type Game = {
   id: string,
@@ -14,7 +20,9 @@ export type Game = {
   possibleSquares: PossibleSquare[],
   selectedPiece: PieceTypeWithPublicName | null,
   lastAction: OperationTypeAfterSquareClick,
-  enpassant: boolean
+  enpassant: boolean,
+  promotionPieces: (string | PieceType)[][],
+  showPromotions: boolean
 };
 
 const Board: React.FC<{ player: string }> = ({ player }) => {
@@ -26,7 +34,29 @@ const Board: React.FC<{ player: string }> = ({ player }) => {
     selectedPiece: null,
     lastAction: 'inprogress',
     enpassant: false,
+    promotionPieces: player === 'white' ? [...promotionPiecesForWhite.entries()] : [...promotionPiecesForBlack.entries()],
+    showPromotions: false,
   });
+
+  useEffect(() => {
+
+    let promotionAvailable = false;
+    [...game.pieces.values()].forEach((piece: PieceType) => {
+      if (game.player === 'white' && piece.name === 'WP' && piece.y === 7) {
+        promotionAvailable = true;
+      }
+      else if (game.player !== 'white' && piece.name === 'BP' && piece.y === 0) {
+        promotionAvailable = true;
+      }
+    });
+
+    if (promotionAvailable && !game.showPromotions) {
+      setGame(prev => ({
+        ...prev,
+        showPromotions: true
+      }));
+    }
+  }, [game]);
 
   return (
     <div data-testid={game.lastAction} className={styles[`${player === 'white' ? 'board' : 'flip_board'}`]}>
@@ -39,6 +69,20 @@ const Board: React.FC<{ player: string }> = ({ player }) => {
             square={square}
           />
         )))
+      }
+      {
+        game.showPromotions && (
+          <div className={styles.promotions}>
+            {game.promotionPieces.map(([publicName, info]) => (
+              <Promotion
+                key={publicName as KeyType}
+                piece={{ publicName: publicName as string, info: info as PieceType }}
+                game={game}
+                setGame={setGame}
+              />
+            ))}
+          </div>
+        )
       }
     </div>
   );
