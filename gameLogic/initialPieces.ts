@@ -9,6 +9,20 @@ export type PieceType = {
 
 export type Pieces = Map<string, PieceType>;
 
+export const promotionPiecesForWhite: Pieces = new Map<string, PieceType>([
+  ['RH1', { name: "WR", x: 0, y: 0, color: "white", isFirstMove: false }],
+  ['KNG1', { name: "WKN", x: 0, y: 0, color: "white" }],
+  ['BF1', { name: "WB", x: 0, y: 0, color: "white" }],
+  ['QD1', { name: "WQ", x: 0, y: 0, color: "white" }],
+]);
+
+export const promotionPiecesForBlack: Pieces = new Map<string, PieceType>([
+  ['RA8', { name: "BR", x: 0, y: 0, color: "black", isFirstMove: false }],
+  ['KNB8', { name: "BKN", x: 0, y: 0, color: "black" }],
+  ['BC8', { name: "BB", x: 0, y: 0, color: "black" }],
+  ['QE8', { name: "BQ", x: 0, y: 0, color: "black" }],
+]);
+
 export default new Map<string, PieceType>([
   // white rooks
   ['RH1', { name: "WR", x: 7, y: 0, color: "white", isFirstMove: true }],
