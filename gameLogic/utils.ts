@@ -1,3 +1,4 @@
+import { PieceTypeWithPublicName } from '../src/components/Square';
 import { PieceType, Pieces } from './initialPieces';
 
 export type PossibleSquare = {
@@ -56,4 +57,17 @@ export function traverseChessLine(
   }
 
   return moves;
+}
+
+export function promote(pieces: Pieces, piece: PieceTypeWithPublicName): Pieces {
+  for (const [k, v] of pieces.entries()) {
+    if (v.name === 'WP' || v.name === 'BP') {
+      if (v.y === 7 || v.y === 0) {
+        pieces.set(piece.publicName, { ...piece.info, x: v.x, y: v.y });
+        pieces.delete(k);
+        break;
+      }
+    }
+  }
+  return pieces;
 }
